@@ -1,0 +1,40 @@
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Gophish data
+gophish/data/gophish.db
+gophish/data/gophish.db-shm
+gophish/data/gophish.db-wal
+gophish/data/campaigns/
+gophish/data/groups/
+gophish/data/templates/
+
+# Certificates
+*.crt
+*.key
+*.pem
+
+# Docker volumes
+caddy_data/
+caddy_config/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Python
+__pycache__/
+.pytest_cache/
+venv/

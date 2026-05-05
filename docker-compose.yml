@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  gophish:
+    image: gophish/gophish:latest
+    container_name: gophish
+    restart: unless-stopped
+    volumes:
+      - ./gophish/data:/opt/gophish/data
+      - ./gophish/config.json:/opt/gophish/config.json
+    expose:
+      - "3333"
+      - "80"
+    networks:
+      - phishing_network
+    environment:
+      - TZ=UTC
+
+  caddy:
+    image: caddy:latest
+    container_name: caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - gophish
+    networks:
+      - phishing_network
+    environment:
+      - TZ=UTC
+
+networks:
+  phishing_network:
+    driver: bridge
+
+volumes:
+  caddy_data:
+  caddy_config:
