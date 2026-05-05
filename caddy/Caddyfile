@@ -1,10 +1,11 @@
 # Caddy configuration for Gophish phishing landing pages
 # This proxies all traffic to the Gophish phishing server
 
-:80 {
-	# Tell Caddy to never enforce HTTP-to-HTTPS redirect logic, Railway does this.
+{
 	auto_https off
+}
 
+:80 {
 	@phish host phish.skippycrm.nl gophish.skippycrm.nl
 	handle @phish {
 		reverse_proxy http://gophish-03cd.railway.internal:80 {
