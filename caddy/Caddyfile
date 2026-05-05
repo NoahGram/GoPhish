@@ -1,7 +1,7 @@
 # Caddy configuration for Gophish phishing landing pages
 # This proxies all traffic to the Gophish phishing server
 
-:80 {
+:80, :443 {
 	# We evaluate the Host header to route traffic
 	@phish host phish.skippycrm.nl gophish.skippycrm.nl
 	handle @phish {
