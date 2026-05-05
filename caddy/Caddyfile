@@ -3,9 +3,7 @@
 
 # Production domain - update this to your actual domain
 phish.skippycrm.nl {
-	reverse_proxy gophish.railway.internal:80
-	encode zstd gzip
-}
+	reverse_proxy gophish.railway.internal:80 {
 		# Preserve headers for proper logging
 		header_up X-Forwarded-For {http.request.remote.host}
 		header_up X-Forwarded-Proto {http.request.proto}
@@ -19,6 +17,11 @@ phish.skippycrm.nl {
 	header X-Frame-Options "SAMEORIGIN"
 	header X-Content-Type-Options "nosniff"
 	header X-XSS-Protection "1; mode=block"
+}
+
+# Admin Panel reverse proxy
+:3333 {
+    reverse_proxy gophish.railway.internal:3333
 }
 
 # HTTP to HTTPS redirect for non-matching hosts
