@@ -2,9 +2,10 @@
 # This proxies all traffic to the Gophish phishing server
 
 # Production domain - update this to your actual domain
-phish.example.com {
-	# Proxy all requests to the Gophish phishing server
-	reverse_proxy gophish:80 {
+phish.skippycrm.nl {
+	reverse_proxy gophish.railway.internal:80
+	encode zstd gzip
+}
 		# Preserve headers for proper logging
 		header_up X-Forwarded-For {http.request.remote.host}
 		header_up X-Forwarded-Proto {http.request.proto}
