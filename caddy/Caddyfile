@@ -1,25 +1,19 @@
 # Caddy configuration for Gophish phishing landing pages
 # This proxies all traffic to the Gophish phishing server
 
-# HTTP to HTTPS redirect for non-matching hosts
-# We only want to handle the specific domains, otherwise we cause loops.
-# Let Railway handle the SSL termination.
-http://phish.skippycrm.nl {
-	reverse_proxy gophish.railway.internal:80 {
-		header_up X-Forwarded-For {http.request.remote.host}
-		header_up X-Forwarded-Proto {http.request.proto}
-		header_up X-Real-IP {http.request.remote.host}
+:80 {
+	# We evaluate the Host header to route traffic
+	@phish host phish.skippycrm.nl gophish.skippycrm.nl
+	handle @phish {
+		reverse_proxy gophish.railway.internal:80 {
+			header_up X-Forwarded-For {http.request.remote.host}
+			header_up X-Forwarded-Proto {http.request.proto}
+			header_up X-Real-IP {http.request.remote.host}
+		}
 	}
-}
 
-http://gophish.skippycrm.nl {
-	reverse_proxy gophish.railway.internal:80 {
-		header_up X-Forwarded-For {http.request.remote.host}
-		header_up X-Forwarded-Proto {http.request.proto}
-		header_up X-Real-IP {http.request.remote.host}
+	@admin host cozy-rebirth-production-de31.up.railway.app
+	handle @admin {
+		reverse_proxy gophish.railway.internal:3333
 	}
-}
-
-http://cozy-rebirth-production-de31.up.railway.app {
-    reverse_proxy gophish.railway.internal:3333
 }
