@@ -19,8 +19,8 @@ phish.skippycrm.nl {
 	header X-XSS-Protection "1; mode=block"
 }
 
-# Admin Panel reverse proxy
-:3333 {
+# Admin Panel reverse proxy (using exact domain for Caddy matcher)
+cozy-rebirth-production-de31.up.railway.app {
     reverse_proxy gophish.railway.internal:3333
 }
 
