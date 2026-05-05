@@ -3,6 +3,7 @@ FROM gophish/gophish:latest
 # Copy our custom configuration
 COPY gophish/config.json /opt/gophish/config.json
 
-# Expose Admin and Phishing ports
-EXPOSE 3333
-EXPOSE 80
+# You only need to EXPOSE the single port that Railway supports 
+EXPOSE 8080
+
+CMD ["./gophish"]
