@@ -1,4 +1,5 @@
 FROM caddy:latest
 
-# We copy our Caddyfile securely to the caddy container.
-COPY caddy/Caddyfile /etc/caddy/Caddyfile
+# Since the root directory is set to 'caddy', the build context is already inside the caddy folder.
+# We just need to copy 'Caddyfile' (which is in the same folder as this Dockerfile)
+COPY Caddyfile /etc/caddy/Caddyfile
