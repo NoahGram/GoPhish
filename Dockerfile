@@ -6,5 +6,6 @@ USER root
 # Copy our custom configuration
 COPY gophish/config.json /opt/gophish/config.json
 
-# You only need to EXPOSE the single port that Railway supports 
-EXPOSE 8080
+# Tell Railway's internal network to open BOTH these ports
+EXPOSE 80
+EXPOSE 3333
